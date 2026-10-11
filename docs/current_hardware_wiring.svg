@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1320" viewBox="0 0 1800 1320">
+  <defs>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #17263c; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 17px; fill: #52647b; }
+      .card { fill: #fff; stroke: #cbd5e1; stroke-width: 2; }
+      .card-title { font-size: 22px; font-weight: 700; }
+      .small { font-size: 15px; fill: #52647b; }
+      .label { font-size: 17px; font-weight: 600; }
+      .pin { font-size: 16px; font-family: Consolas, monospace; font-weight: 700; }
+      .board { fill: #18324c; stroke: #10253a; stroke-width: 3; }
+      .board-text { fill: #f3f7fb; }
+      .board-muted { fill: #bfd0df; }
+      .wire-rgb-g { stroke: #16a765; }
+      .wire-rgb-b { stroke: #2479d8; }
+      .wire-rgb-r { stroke: #e34d59; }
+      .wire-enc { stroke: #d28a15; }
+      .wire-buz { stroke: #8b5cc7; }
+      .wire-servo { stroke: #1199a8; }
+      .wire { fill: none; stroke-width: 4; stroke-linecap: round; }
+      .pin-dot { stroke: white; stroke-width: 2; }
+      .tag { fill: #fef3c7; stroke: #d8a42d; stroke-width: 1.5; }
+      .tag-text { font-size: 15px; font-weight: 700; }
+      .note { fill: #fff9e8; stroke: #e6c875; stroke-width: 1.5; }
+      .note-text { font-size: 15px; }
+      .port { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="1800" height="1320" fill="#f1f5f9"/>
+
+  <text x="60" y="62" class="title">Smart Bedside Controller V0.1｜当前硬件接线示意</text>
+  <text x="60" y="96" class="subtitle">按已确认的模块和 GPIO 绘制的逻辑接线图；开发板外形与排针位置不代表具体板型原理图。</text>
+
+  <!-- RGB LED -->
+  <rect x="60" y="160" width="460" height="390" rx="18" class="card"/>
+  <text x="88" y="200" class="card-title">RGB140C05 共阳 RGB LED</text>
+  <text x="88" y="228" class="small">公共端接 3.3 V；各颜色由 GPIO 下拉点亮</text>
+  <line x1="495" y1="300" x2="600" y2="300" class="wire wire-rgb-g"/>
+  <line x1="495" y1="360" x2="600" y2="360" class="wire wire-rgb-b"/>
+  <line x1="495" y1="420" x2="600" y2="420" class="wire wire-rgb-r"/>
+  <circle cx="495" cy="300" r="6" fill="#16a765"/>
+  <circle cx="495" cy="360" r="6" fill="#2479d8"/>
+  <circle cx="495" cy="420" r="6" fill="#e34d59"/>
+  <text x="90" y="306" class="label">G</text><text x="135" y="306" class="pin">GPIO18</text>
+  <text x="90" y="366" class="label">B</text><text x="135" y="366" class="pin">GPIO19</text>
+  <text x="90" y="426" class="label">R</text><text x="135" y="426" class="pin">GPIO20</text>
+  <line x1="225" y1="300" x2="495" y2="300" class="wire wire-rgb-g"/>
+  <line x1="225" y1="360" x2="495" y2="360" class="wire wire-rgb-b"/>
+  <line x1="225" y1="420" x2="495" y2="420" class="wire wire-rgb-r"/>
+  <rect x="88" y="465" width="170" height="34" rx="8" class="tag"/>
+  <text x="105" y="488" class="tag-text">公共阳极 → +3V3</text>
+  <text x="88" y="526" class="small">限流电阻：当前 RGB 实物接法/阻值尚未记录，需按实物图补齐。</text>
+
+  <!-- Encoder -->
+  <rect x="60" y="600" width="460" height="390" rx="18" class="card"/>
+  <text x="88" y="640" class="card-title">旋转编码器成品模块</text>
+  <text x="88" y="668" class="small">信号引脚按你最新更正的接线</text>
+  <line x1="495" y1="700" x2="600" y2="700" class="wire wire-enc"/>
+  <line x1="495" y1="760" x2="600" y2="760" class="wire wire-enc"/>
+  <line x1="495" y1="820" x2="600" y2="820" class="wire wire-enc"/>
+  <circle cx="495" cy="700" r="6" fill="#d28a15"/>
+  <circle cx="495" cy="760" r="6" fill="#d28a15"/>
+  <circle cx="495" cy="820" r="6" fill="#d28a15"/>
+  <text x="90" y="706" class="label">S1</text><text x="150" y="706" class="pin">GPIO21</text>
+  <text x="90" y="766" class="label">S2</text><text x="150" y="766" class="pin">GPIO22</text>
+  <text x="90" y="826" class="label">KEY</text><text x="150" y="826" class="pin">GPIO23</text>
+  <line x1="225" y1="700" x2="495" y2="700" class="wire wire-enc"/>
+  <line x1="225" y1="760" x2="495" y2="760" class="wire wire-enc"/>
+  <line x1="225" y1="820" x2="495" y2="820" class="wire wire-enc"/>
+  <rect x="88" y="865" width="190" height="34" rx="8" class="tag"/>
+  <text x="104" y="888" class="tag-text">VCC：原图标注 +5V</text>
+  <rect x="292" y="865" width="95" height="34" rx="8" class="tag"/>
+  <text x="310" y="888" class="tag-text">GND</text>
+  <text x="88" y="930" class="small">模块供电沿用此前模块图标注；当前未确认其电源来源。</text>
+  <text x="88" y="957" class="small">S1/S2/KEY 为输入，固件使用内部上拉并轮询消抖。</text>
+
+  <!-- ESP32 board -->
+  <rect x="600" y="150" width="600" height="860" rx="28" class="board"/>
+  <text x="900" y="202" text-anchor="middle" class="card-title board-text">ESP32-C6-DevKitC-1-N8 开发板</text>
+  <text x="900" y="232" text-anchor="middle" class="small board-muted">逻辑引脚图｜具体开发板型号及排针位置未确认</text>
+  <rect x="755" y="390" width="290" height="250" rx="22" fill="#274b6b" stroke="#6e91ad" stroke-width="2"/>
+  <text x="900" y="470" text-anchor="middle" class="card-title board-text">ESP32-C6</text>
+  <text x="900" y="510" text-anchor="middle" class="small board-muted">当前固件测试入口</text>
+  <text x="900" y="545" text-anchor="middle" class="pin board-text">encoder_test.c</text>
+  <text x="900" y="590" text-anchor="middle" class="small board-muted">app_main 轮询；未创建额外任务</text>
+
+  <!-- Left board pins -->
+  <line x1="600" y1="300" x2="650" y2="300" stroke="#e2e8f0" stroke-width="3"/>
+  <line x1="600" y1="360" x2="650" y2="360" stroke="#e2e8f0" stroke-width="3"/>
+  <line x1="600" y1="420" x2="650" y2="420" stroke="#e2e8f0" stroke-width="3"/>
+  <line x1="600" y1="700" x2="650" y2="700" stroke="#e2e8f0" stroke-width="3"/>
+  <line x1="600" y1="760" x2="650" y2="760" stroke="#e2e8f0" stroke-width="3"/>
+  <line x1="600" y1="820" x2="650" y2="820" stroke="#e2e8f0" stroke-width="3"/>
+  <circle cx="600" cy="300" r="7" class="pin-dot" fill="#16a765"/>
+  <circle cx="600" cy="360" r="7" class="pin-dot" fill="#2479d8"/>
+  <circle cx="600" cy="420" r="7" class="pin-dot" fill="#e34d59"/>
+  <circle cx="600" cy="700" r="7" class="pin-dot" fill="#d28a15"/>
+  <circle cx="600" cy="760" r="7" class="pin-dot" fill="#d28a15"/>
+  <circle cx="600" cy="820" r="7" class="pin-dot" fill="#d28a15"/>
+  <text x="660" y="306" class="pin board-text">GPIO18</text>
+  <text x="660" y="366" class="pin board-text">GPIO19</text>
+  <text x="660" y="426" class="pin board-text">GPIO20</text>
+  <text x="660" y="706" class="pin board-text">GPIO21</text>
+  <text x="660" y="766" class="pin board-text">GPIO22</text>
+  <text x="660" y="826" class="pin board-text">GPIO23</text>
+
+  <!-- Right board pins -->
+  <line x1="1150" y1="330" x2="1200" y2="330" stroke="#e2e8f0" stroke-width="3"/>
+  <line x1="1150" y1="660" x2="1200" y2="660" stroke="#e2e8f0" stroke-width="3"/>
+  <circle cx="1200" cy="330" r="7" class="pin-dot" fill="#8b5cc7"/>
+  <circle cx="1200" cy="660" r="7" class="pin-dot" fill="#1199a8"/>
+  <text x="1060" y="336" class="pin board-text">GPIO4</text>
+  <text x="1060" y="666" class="pin board-text">GPIO6</text>
+  <rect x="825" y="850" width="150" height="38" rx="9" class="tag"/>
+  <text x="868" y="875" class="tag-text">+3V3</text>
+  <rect x="825" y="905" width="150" height="38" rx="9" class="tag"/>
+  <text x="873" y="930" class="tag-text">GND</text>
+
+  <!-- Buzzer -->
+  <rect x="1320" y="200" width="420" height="330" rx="18" class="card"/>
+  <text x="1350" y="242" class="card-title">MH-FMD 蜂鸣器模块</text>
+  <text x="1350" y="272" class="small">低电平触发；已验证 PWM 方波可发声</text>
+  <line x1="1200" y1="330" x2="1320" y2="330" class="wire wire-buz"/>
+  <circle cx="1320" cy="330" r="6" fill="#8b5cc7"/>
+  <text x="1350" y="336" class="pin">IN / OUT ← GPIO4（PWM）</text>
+  <rect x="1350" y="390" width="140" height="34" rx="8" class="tag"/>
+  <text x="1375" y="413" class="tag-text">VCC +3V3</text>
+  <rect x="1505" y="390" width="100" height="34" rx="8" class="tag"/>
+  <text x="1524" y="413" class="tag-text">GND</text>
+  <text x="1350" y="470" class="small">按键/模块级蜂鸣器测试用，不代表完整业务流程。</text>
+
+  <!-- Servo -->
+  <rect x="1320" y="600" width="420" height="270" rx="18" class="card"/>
+  <text x="1350" y="642" class="card-title">SG90 舵机</text>
+  <text x="1350" y="672" class="small">舵机测试已通过；信号输出约 50 Hz</text>
+  <line x1="1200" y1="660" x2="1320" y2="660" class="wire wire-servo"/>
+  <circle cx="1320" cy="660" r="6" fill="#1199a8"/>
+  <text x="1350" y="666" class="pin">橙/黄：PWM 信号 ← GPIO6</text>
+  <rect x="1350" y="725" width="170" height="34" rx="8" class="tag"/>
+  <text x="1372" y="748" class="tag-text">红：外置 +5V</text>
+  <rect x="1535" y="725" width="165" height="34" rx="8" class="tag"/>
+  <text x="1555" y="748" class="tag-text">棕/黑：GND</text>
+  <text x="1350" y="810" class="small">舵机电源不接开发板 3.3 V；电源负极需与 ESP32 GND 共地。</text>
+
+  <!-- Servo supply -->
+  <rect x="1320" y="910" width="420" height="115" rx="18" class="card"/>
+  <text x="1350" y="950" class="card-title">独立 5 V 电源适配器</text>
+  <text x="1350" y="985" class="label">+5V → SG90 红线　　GND → 共地</text>
+
+  <!-- Notes / legend -->
+  <rect x="60" y="1040" width="1680" height="230" rx="18" class="note"/>
+  <text x="90" y="1080" class="card-title">图纸说明</text>
+  <text x="90" y="1118" class="note-text">1. 实线表示已确认的信号连接；同名电源标签（+3V3、GND）表示同一电气网。</text>
+  <text x="90" y="1152" class="note-text">2. 开发板已确认为 ESP32-C6-DevKitC-1-N8；本图是逻辑接线示意，真实排针位置和板载电路以乐鑫官方指南为准。</text>
+  <text x="90" y="1186" class="note-text">3. 编码器 VCC 按此前模块图标注为 +5V；电源来源未确认。舵机使用独立 +5V，图中按要求画为与 ESP32 共地。</text>
+  <text x="90" y="1220" class="note-text">4. RGB 通道限流电阻的实物接法和阻值未记录；确认后可把本图补成可直接照接的最终版。</text>
+</svg>
